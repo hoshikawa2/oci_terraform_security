@@ -24,7 +24,8 @@ The Terraform script will be executed through the OCI Resource Manager and the u
 ## Pre Requirements
 
 - Have an user inside an user group without any Policy. This user will be given the appropriate permissions to run Terraform in OCI Resource Manager
- 
+- An **OCI Object Storage** bucket created previously in a specific compartment (if you want to generate the **Terraform** script into this bucket)
+
 ## Task - Create a Secret for Autonomous Database in OCI Vault
 
 >**Note:** For this step, we need to log in with an Admin user in OCI.
@@ -37,6 +38,20 @@ The Terraform script will be executed through the OCI Resource Manager and the u
 ![img.png](img.png)
 
 ![CleanShot 2024-04-15 at 21.26.11.png](CleanShot%202024-04-15%20at%2021.26.11.png)
+
+    This policy gives the permission to group TestGroup created previously to manage a Stack and jobs in Resource Manager
+    - Allow group 'Default'/'TestGroup' to manage orm-stacks in compartment integration
+    - Allow group 'Default'/'TestGroup' to manage orm-jobs in compartment integration
+    - Allow group 'Default'/'TestGroup' to read orm-config-source-providers in tenancy
+
+    This policy gives the right to create an Autonomous Database instance in the compartment integration
+    - Allow group 'Default'/'TestGroup' to manage autonomous-database in compartment integration
+
+    The group can read the password stored in Vault/Secret through Terraform scripts 
+    - Allow group 'Default'/'TestGroup' to use secret-family in tenancy
+
+    This policy gives the right to save the Terraform scripts on a specific compartment
+    - Allow group 'Default'/'TestGroup' to manage all-resources in compartment kubernetes
 
 
 ## Task - Create a Stack from a Template
@@ -52,15 +67,48 @@ And go to **Developer Services** and **Resource Manager** / **Stacks**
 
 ![img_2.png](img_2.png)
 
-Select your **compartment** 
+Select your **compartment** and click on **Create stack** button
 
 ![CleanShot 2024-04-15 at 07.47.32.png](CleanShot%202024-04-15%20at%2007.47.32.png)
+
+Now select **Template** option and click on **Select template** button to choose to generate a **Terraform** script for the the **Autonomous Database** 
+
 ![CleanShot 2024-04-15 at 07.48.19.png](CleanShot%202024-04-15%20at%2007.48.19.png)
+
+In **Service** tab, find the **Autonomous Transaction Processing Database** option and click to mark this option and then click on **Select template** button 
+
 ![CleanShot 2024-04-15 at 07.49.57.png](CleanShot%202024-04-15%20at%2007.49.57.png)
+
+You can generate the **Terraform** scripts and store into a **OCI Object Storage** bucket.
+Select **Use custom Terraform providers**, then choose the bucket **compartment** and **name**.
+Save your **stack**
+
 ![CleanShot 2024-04-15 at 07.51.23.png](CleanShot%202024-04-15%20at%2007.51.23.png)
+
+You stack is saved 
+
 ![CleanShot 2024-04-15 at 07.54.01.png](CleanShot%202024-04-15%20at%2007.54.01.png)
+
+This template does not read the secret stored in your **OCI Vault**. To make the **Terraform** to read the **secret**, we need to change the code.
+
+Click on **Edit** select box and choose the **Edit Terraform configuration in code editor** option.
+
+![img_3.png](img_3.png)
+
+You can now edit the code. The default code generates a random string for the password
+
+**Figure 1 - main.tf** file
 ![CleanShot 2024-04-15 at 08.05.40.png](CleanShot%202024-04-15%20at%2008.05.40.png)
+
+**Figure 2 - main.tf** file
 ![CleanShot 2024-04-15 at 08.08.32.png](CleanShot%202024-04-15%20at%2008.08.32.png)
+
+You need to add a new data named **oci_secrets_secretbundle** and assign it to the attributes:
+
+- admin_password
+- 
+
+**Figure 3 - main.tf** file
 ![CleanShot 2024-04-15 at 08.28.07.png](CleanShot%202024-04-15%20at%2008.28.07.png)
 ![CleanShot 2024-04-15 at 08.30.15 substituir.png](CleanShot%202024-04-15%20at%2008.30.15%20substituir.png)
 ![CleanShot 2024-04-15 at 08.30.52.png](CleanShot%202024-04-15%20at%2008.30.52.png)
