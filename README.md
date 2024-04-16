@@ -129,11 +129,44 @@ Include this code into **variables.tf** file and replace the **OCID** for your s
 **Figure 6 - variables.tf** file
 ![CleanShot 2024-04-15 at 08.30.52.png](CleanShot%202024-04-15%20at%2008.30.52.png)
 
+## Task - Test permissions
+
+You can test the **Policies** and see how you have control of **OCI Resource Manager**, **OCI Vault / Secret** and **Autonomous** instances in a specific **compartment**.
+
+Let's do some tests. First, with your **Admin user**, log in into **OCI** and remove all the **Policies** for the group **TestGroup** in the **TestPolicy** Policy. Click on **Delete** button and confirm.
+
+![img_7.png](img_7.png)
+
+Now, log in with your **user** in the group **TestGroup** and you cannot see the stack, so you cannot execute it.
 
 ![CleanShot 2024-04-15 at 20.02.33.png](CleanShot%202024-04-15%20at%2020.02.33.png)
-![CleanShot 2024-04-15 at 20.12.37.png](CleanShot%202024-04-15%20at%2020.12.37.png)
+
+Now, with the **Admin user**, include this statement:
+
+    Allow group 'Default'/'TestGroup' to manage orm-stacks in compartment integration
+    Allow group 'Default'/'TestGroup' to manage orm-jobs in compartment integration
+    Allow group 'Default'/'TestGroup' to read orm-config-source-providers in tenancy
+    Allow group 'Default'/'TestGroup' to manage all-resources in compartment kubernetes
+
+![img_8.png](img_8.png)
+
+This statements grant your **user** in **TestGroup** to use the **OCI Resource Manager** stack.
+
 ![CleanShot 2024-04-15 at 20.12.55.png](CleanShot%202024-04-15%20at%2020.12.55.png)
+
+We removed the grant for your **user** to create an **Autonomous** instance and read the **secret** in **OCI Vault**. So you can execute your **stack** but with no success. To test, click on **apply** button in your **stack** detail page.
+
 ![CleanShot 2024-04-15 at 20.16.39.png](CleanShot%202024-04-15%20at%2020.16.39.png)
 ![CleanShot 2024-04-15 at 20.18.40.png](CleanShot%202024-04-15%20at%2020.18.40.png)
-![CleanShot 2024-04-15 at 20.26.37.png](CleanShot%202024-04-15%20at%2020.26.37.png)
+
+Now, let's include **Autonomous** and **OCI Vault** permissions on the **TestPolicy**
+
+    Allow group 'Default'/'TestGroup' to manage all-resources in compartment kubernetes
+    Allow group 'Default'/'TestGroup' to manage autonomous-database in compartment integration
+
+![img_9.png](img_9.png)
+
+Click again on **apply** button in your **stack** detail page and you can see you have the control about all resources without exposing any password.
+
 ![CleanShot 2024-04-15 at 21.34.57.png](CleanShot%202024-04-15%20at%2021.34.57.png)
+
