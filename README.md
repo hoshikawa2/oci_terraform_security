@@ -28,8 +28,41 @@ The Terraform script will be executed through the OCI Resource Manager and the u
 
 ## Task - Create a Secret for Autonomous Database in OCI Vault
 
->**Note:** For this step, we need to log in with an Admin user in OCI.
+We will create a password in **OCI Vault / Secret** to illustrate how to configure a new resource in **Terraform** without expose a sensitive data.
 
+**OCI Vault / Secrets** are credentials such as passwords, certificates, SSH keys, or authentication tokens that you use with Oracle Cloud Infrastructure services. Storing secrets in a vault provides greater security than you might achieve storing them elsewhere, such as in code or configuration files. You can retrieve secrets from the Vault service when you need them to access resources or other services.
+You can create secrets by using the Console, CLI, or API. Secret contents for a secret are imported to the service from an external source. The Vault service stores secrets in vaults.
+
+>**Note:** For this step, we need to log in with an Admin user in OCI. You must have permission to create a password in OCI Vault
+
+Go to me Main menu and select **Identity & Security** and **Vault**
+
+![img_10.png](img_10.png)
+
+Select the compartment you want to store the secrets and click on **Create Vault** button
+
+![img_29.png](img_29.png)
+
+Put a name for your vault, confirm the compartment and click on **Create Vault** button
+
+![img_11.png](img_11.png)
+Confirm the vault creation and let's create a key. Click on **Create Key** button
+
+![img_12.png](img_12.png)
+
+Confirm the compartment and put a name for your key. For example, put **autonomouskey** on Name and click on **Create Key** button
+
+![img_13.png](img_13.png)
+Confirm the key creation
+
+![img_14.png](img_14.png)
+Now, click on **Secrets** option and click on **Create Secret** button
+
+![img_15.png](img_15.png)
+
+We will create the **Autonomous Admin** password. Confirm the compartment, put a name for your first secret. Select **Manual secret generation** to include the password. Select **Plain-Text** option on **Secret Type Template** and write your password. Finally, click on **Create Secret** button.
+
+![img_16.png](img_16.png)
 
 ## Task - Create Policies to the OCI user
 
