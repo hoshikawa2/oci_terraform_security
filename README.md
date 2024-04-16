@@ -170,3 +170,12 @@ Click again on **apply** button in your **stack** detail page and you can see yo
 
 ![CleanShot 2024-04-15 at 21.34.57.png](CleanShot%202024-04-15%20at%2021.34.57.png)
 
+## Acknowledgments
+
+- Author: Cristiano Hoshikawa (Oracle LAD A-Team Solution Engineer)
+
+## References
+
+- [Using OCI Vault Secrets for Terraform resources](https://blogs.oracle.com/developers/post/using-oci-vault-secrets-for-terraform-resources)
+- [Securing Resource Manager](https://docs.oracle.com/en-us/iaas/Content/Security/Reference/resourcemanager_security.htm)
+- [Overview of IAM](https://docs.oracle.com/en-us/iaas/Content/Identity/getstarted/identity-domains.htm#identity_documentation)
