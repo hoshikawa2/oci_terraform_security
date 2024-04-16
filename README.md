@@ -37,36 +37,36 @@ You can create secrets by using the Console, CLI, or API. Secret contents for a 
 
 Go to me Main menu and select **Identity & Security** and **Vault**
 
-![img_10.png](img_10.png)
+![img_10.png](images/img_10.png)
 
 Select the compartment you want to store the secrets and click on **Create Vault** button
 
-![img_29.png](img_29.png)
+![img_29.png](images/img_29.png)
 
 Put a name for your vault, confirm the compartment and click on **Create Vault** button
 
-![img_11.png](img_11.png)
+![img_11.png](images/img_11.png)
 Confirm the vault creation and let's create a key. Click on **Create Key** button
 
-![img_12.png](img_12.png)
+![img_12.png](images/img_12.png)
 
 Confirm the compartment and put a name for your key. For example, put **autonomouskey** on Name and click on **Create Key** button
 
-![img_13.png](img_13.png)
+![img_13.png](images/img_13.png)
 Confirm the key creation
 
-![img_14.png](img_14.png)
+![img_14.png](images/img_14.png)
 Now, click on **Secrets** option and click on **Create Secret** button
 
-![img_15.png](img_15.png)
+![img_15.png](images/img_15.png)
 
 We will create the **Autonomous Admin** password. Confirm the compartment, put a name for your first secret. Select **Manual secret generation** to include the password. Select **Plain-Text** option on **Secret Type Template** and write your password. Finally, click on **Create Secret** button.
 
-![img_16.png](img_16.png)
+![img_16.png](images/img_16.png)
 
 You will need the **Secret OCID**. Copy the **OCID** value from the **Secret** detail page
 
-![img_17.png](img_17.png)
+![img_17.png](images/img_17.png)
 
 ## Task 2 - Create Policies to the OCI user
 
@@ -76,19 +76,19 @@ This step is very important because here is the control of all privileges needed
 
 >**Note:** For this step, we need to log in with an Admin user in OCI.
 
-![img.png](img.png)
+![img.png](images/img.png)
 
 Go to the Main Menu, select **Identity & Security** and select **Policies**.
 
-![img_18.png](img_18.png)
+![img_18.png](images/img_18.png)
 
 Click in **Create Policy** button
 
-![img_19.png](img_19.png)
+![img_19.png](images/img_19.png)
 
 And include the policies:
 
-![CleanShot 2024-04-15 at 21.26.11.png](CleanShot%202024-04-15%20at%2021.26.11.png)
+![CleanShot 2024-04-15 at 21.26.11.png](images/CleanShot%202024-04-15%20at%2021.26.11.png)
 
     This policy gives the permission to group TestGroup created previously to manage a Stack and jobs in Resource Manager
     - Allow group 'Default'/'TestGroup' to manage orm-stacks in compartment integration
@@ -112,47 +112,47 @@ The first step is log in as the user created previously.
 
 Now, select the Main Menu
 
-![img_1.png](img_1.png)
+![img_1.png](images/img_1.png)
 
 And go to **Developer Services** and **Resource Manager** / **Stacks**
 
-![img_2.png](img_2.png)
+![img_2.png](images/img_2.png)
 
 Select your **compartment** and click on **Create stack** button
 
-![CleanShot 2024-04-15 at 07.47.32.png](CleanShot%202024-04-15%20at%2007.47.32.png)
+![CleanShot 2024-04-15 at 07.47.32.png](images/CleanShot%202024-04-15%20at%2007.47.32.png)
 
 Now select **Template** option and click on **Select template** button to choose to generate a **Terraform** script for the the **Autonomous Database** 
 
-![CleanShot 2024-04-15 at 07.48.19.png](CleanShot%202024-04-15%20at%2007.48.19.png)
+![CleanShot 2024-04-15 at 07.48.19.png](images/CleanShot%202024-04-15%20at%2007.48.19.png)
 
 In **Service** tab, find the **Autonomous Transaction Processing Database** option and click to mark this option and then click on **Select template** button 
 
-![CleanShot 2024-04-15 at 07.49.57.png](CleanShot%202024-04-15%20at%2007.49.57.png)
+![CleanShot 2024-04-15 at 07.49.57.png](images/CleanShot%202024-04-15%20at%2007.49.57.png)
 
 You can generate the **Terraform** scripts and store into a **OCI Object Storage** bucket.
 Select **Use custom Terraform providers**, then choose the bucket **compartment** and **name**.
 Save your **stack**
 
-![CleanShot 2024-04-15 at 07.51.23.png](CleanShot%202024-04-15%20at%2007.51.23.png)
+![CleanShot 2024-04-15 at 07.51.23.png](images/CleanShot%202024-04-15%20at%2007.51.23.png)
 
 You stack is saved 
 
-![CleanShot 2024-04-15 at 07.54.01.png](CleanShot%202024-04-15%20at%2007.54.01.png)
+![CleanShot 2024-04-15 at 07.54.01.png](images/CleanShot%202024-04-15%20at%2007.54.01.png)
 
 This template does not read the secret stored in your **OCI Vault**. To make the **Terraform** to read the **secret**, we need to change the code.
 
 Click on **Edit** select box and choose the **Edit Terraform configuration in code editor** option.
 
-![img_3.png](img_3.png)
+![img_3.png](images/img_3.png)
 
 You can now edit the code. The default code generates a random string for the password
 
 **Figure 1 - main.tf** file
-![CleanShot 2024-04-15 at 08.05.40.png](CleanShot%202024-04-15%20at%2008.05.40.png)
+![CleanShot 2024-04-15 at 08.05.40.png](images/CleanShot%202024-04-15%20at%2008.05.40.png)
 
 **Figure 2 - main.tf** file
-![CleanShot 2024-04-15 at 08.08.32.png](CleanShot%202024-04-15%20at%2008.08.32.png)
+![CleanShot 2024-04-15 at 08.08.32.png](images/CleanShot%202024-04-15%20at%2008.08.32.png)
 
 You need to add a new data named **oci_secrets_secretbundle** and assign it to the attributes:
 
@@ -160,15 +160,15 @@ You need to add a new data named **oci_secrets_secretbundle** and assign it to t
 - **password** at autonomous_database_wallet position
 
 **Figure 3 - main.tf / autonomous_data_warehouse positon**
-![CleanShot 2024-04-15 at 08.28.07.png](CleanShot%202024-04-15%20at%2008.28.07.png)
+![CleanShot 2024-04-15 at 08.28.07.png](images/CleanShot%202024-04-15%20at%2008.28.07.png)
 
 **Figure 4 - main.tf / autonomous_database position**  
-![img_4.png](img_4.png)
+![img_4.png](images/img_4.png)
 
 **Figure 5 - main.tf / autonomous_database_wallet position**
-![img_5.png](img_5.png)
+![img_5.png](images/img_5.png)
 
-![CleanShot 2024-04-15 at 08.30.15 substituir.png](CleanShot%202024-04-15%20at%2008.30.15%20substituir.png)
+![CleanShot 2024-04-15 at 08.30.15 substituir.png](images/CleanShot%202024-04-15%20at%2008.30.15%20substituir.png)
 
 Include this code into **variables.tf** file and replace the **OCID** for your secret generated previously
 
@@ -178,7 +178,7 @@ Include this code into **variables.tf** file and replace the **OCID** for your s
       }
 
 **Figure 6 - variables.tf** file
-![CleanShot 2024-04-15 at 08.30.52.png](CleanShot%202024-04-15%20at%2008.30.52.png)
+![CleanShot 2024-04-15 at 08.30.52.png](images/CleanShot%202024-04-15%20at%2008.30.52.png)
 
 ## Task 4 - Test permissions
 
@@ -186,11 +186,11 @@ You can test the **Policies** and see how you have control of **OCI Resource Man
 
 Let's do some tests. First, with your **Admin user**, log in into **OCI** and remove all the **Policies** for the group **TestGroup** in the **TestPolicy** Policy. Click on **Delete** button and confirm.
 
-![img_7.png](img_7.png)
+![img_7.png](images/img_7.png)
 
 Now, log in with your **user** in the group **TestGroup** and you cannot see the stack, so you cannot execute it.
 
-![CleanShot 2024-04-15 at 20.02.33.png](CleanShot%202024-04-15%20at%2020.02.33.png)
+![CleanShot 2024-04-15 at 20.02.33.png](images/CleanShot%202024-04-15%20at%2020.02.33.png)
 
 Now, with the **Admin user**, include this statement:
 
@@ -199,27 +199,27 @@ Now, with the **Admin user**, include this statement:
     Allow group 'Default'/'TestGroup' to read orm-config-source-providers in tenancy
     Allow group 'Default'/'TestGroup' to manage all-resources in compartment kubernetes
 
-![img_8.png](img_8.png)
+![img_8.png](images/img_8.png)
 
 This statements grant your **user** in **TestGroup** to use the **OCI Resource Manager** stack.
 
-![CleanShot 2024-04-15 at 20.12.55.png](CleanShot%202024-04-15%20at%2020.12.55.png)
+![CleanShot 2024-04-15 at 20.12.55.png](images/CleanShot%202024-04-15%20at%2020.12.55.png)
 
 We removed the grant for your **user** to create an **Autonomous** instance and read the **secret** in **OCI Vault**. So you can execute your **stack** but with no success. To test, click on **apply** button in your **stack** detail page.
 
-![CleanShot 2024-04-15 at 20.16.39.png](CleanShot%202024-04-15%20at%2020.16.39.png)
-![CleanShot 2024-04-15 at 20.18.40.png](CleanShot%202024-04-15%20at%2020.18.40.png)
+![CleanShot 2024-04-15 at 20.16.39.png](images/CleanShot%202024-04-15%20at%2020.16.39.png)
+![CleanShot 2024-04-15 at 20.18.40.png](images/CleanShot%202024-04-15%20at%2020.18.40.png)
 
 Now, let's include **Autonomous** and **OCI Vault** permissions on the **TestPolicy**
 
     Allow group 'Default'/'TestGroup' to manage all-resources in compartment kubernetes
     Allow group 'Default'/'TestGroup' to manage autonomous-database in compartment integration
 
-![img_9.png](img_9.png)
+![img_9.png](images/img_9.png)
 
 Click again on **apply** button in your **stack** detail page and you can see you have the control about all resources without exposing any password.
 
-![CleanShot 2024-04-15 at 21.34.57.png](CleanShot%202024-04-15%20at%2021.34.57.png)
+![CleanShot 2024-04-15 at 21.34.57.png](images/CleanShot%202024-04-15%20at%2021.34.57.png)
 
 ## Task 5 - Call your OCI Resource Manager automation with REST 
 
@@ -230,7 +230,7 @@ Now we can choose to execute the **OCI Resource Manager** stack with a **REST** 
 
 You can create a **Job** with this material: [Create a Job](https://docs.oracle.com/en-us/iaas/api/#/en/resourcemanager/20180917/Job/CreateJob)
 
-![img_20.png](img_20.png)
+![img_20.png](images/img_20.png)
 
 You will need to create the signature for your **REST** requests. Please, see this material to authenticate and consume the **APIs**
 
