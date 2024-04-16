@@ -23,9 +23,36 @@ The Terraform script will be executed through the OCI Resource Manager and the u
 
 ## Pre Requirements
 
-- Have a user and a user group. This user will be given the appropriate permissions to run Terraform in OCI Resource Manager
+- Have an user inside an user group without any Policy. This user will be given the appropriate permissions to run Terraform in OCI Resource Manager
+ 
+## Task - Create a Secret for Autonomous Database in OCI Vault
+
+>**Note:** For this step, we need to log in with an Admin user in OCI.
 
 
+## Task - Create Policies to the OCI user
+
+>**Note:** For this step, we need to log in with an Admin user in OCI.
+
+![img.png](img.png)
+
+![CleanShot 2024-04-15 at 21.26.11.png](CleanShot%202024-04-15%20at%2021.26.11.png)
+
+
+## Task - Create a Stack from a Template
+
+Let's create a stack for an Autonomous Database instance. We can use a template for this.
+The first step is log in as the user created previously.
+
+Now, select the Main Menu
+
+![img_1.png](img_1.png)
+
+And go to **Developer Services** and **Resource Manager** / **Stacks**
+
+![img_2.png](img_2.png)
+
+Select your **compartment** 
 
 ![CleanShot 2024-04-15 at 07.47.32.png](CleanShot%202024-04-15%20at%2007.47.32.png)
 ![CleanShot 2024-04-15 at 07.48.19.png](CleanShot%202024-04-15%20at%2007.48.19.png)
@@ -43,5 +70,4 @@ The Terraform script will be executed through the OCI Resource Manager and the u
 ![CleanShot 2024-04-15 at 20.16.39.png](CleanShot%202024-04-15%20at%2020.16.39.png)
 ![CleanShot 2024-04-15 at 20.18.40.png](CleanShot%202024-04-15%20at%2020.18.40.png)
 ![CleanShot 2024-04-15 at 20.26.37.png](CleanShot%202024-04-15%20at%2020.26.37.png)
-![CleanShot 2024-04-15 at 21.26.11.png](CleanShot%202024-04-15%20at%2021.26.11.png)
 ![CleanShot 2024-04-15 at 21.34.57.png](CleanShot%202024-04-15%20at%2021.34.57.png)
