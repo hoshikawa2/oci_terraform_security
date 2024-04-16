@@ -26,7 +26,7 @@ The Terraform script will be executed through the OCI Resource Manager and the u
 - Have an user inside an user group without any Policy. This user will be given the appropriate permissions to run Terraform in OCI Resource Manager
 - An **OCI Object Storage** bucket created previously in a specific compartment (if you want to generate the **Terraform** script into this bucket)
 
-## Task - Create a Secret for Autonomous Database in OCI Vault
+## Task 1 - Create a Secret for Autonomous Database in OCI Vault
 
 We will create a password in **OCI Vault / Secret** to illustrate how to configure a new resource in **Terraform** without expose a sensitive data.
 
@@ -64,11 +64,29 @@ We will create the **Autonomous Admin** password. Confirm the compartment, put a
 
 ![img_16.png](img_16.png)
 
-## Task - Create Policies to the OCI user
+You will need the **Secret OCID**. Copy the **OCID** value from the **Secret** detail page
+
+![img_17.png](img_17.png)
+
+## Task 2 - Create Policies to the OCI user
+
+In this tutorial, consider your username **TestUser** included in a group named **TestGroup**. Let's create a **Policy** with name **TestPolicy**.
+
+This step is very important because here is the control of all privileges needed to guarantee the security of **Terraform's** automation.
 
 >**Note:** For this step, we need to log in with an Admin user in OCI.
 
 ![img.png](img.png)
+
+Go to the Main Menu, select **Identity & Security** and select **Policies**.
+
+![img_18.png](img_18.png)
+
+Click in **Create Policy** button
+
+![img_19.png](img_19.png)
+
+And include the policies:
 
 ![CleanShot 2024-04-15 at 21.26.11.png](CleanShot%202024-04-15%20at%2021.26.11.png)
 
@@ -87,7 +105,7 @@ We will create the **Autonomous Admin** password. Confirm the compartment, put a
     - Allow group 'Default'/'TestGroup' to manage all-resources in compartment kubernetes
 
 
-## Task - Create a Stack from a Template
+## Task 3 - Create a Stack from a Template
 
 Let's create a stack for an Autonomous Database instance. We can use a template for this.
 The first step is log in as the user created previously.
@@ -162,7 +180,7 @@ Include this code into **variables.tf** file and replace the **OCID** for your s
 **Figure 6 - variables.tf** file
 ![CleanShot 2024-04-15 at 08.30.52.png](CleanShot%202024-04-15%20at%2008.30.52.png)
 
-## Task - Test permissions
+## Task 4 - Test permissions
 
 You can test the **Policies** and see how you have control of **OCI Resource Manager**, **OCI Vault / Secret** and **Autonomous** instances in a specific **compartment**.
 
@@ -203,6 +221,21 @@ Click again on **apply** button in your **stack** detail page and you can see yo
 
 ![CleanShot 2024-04-15 at 21.34.57.png](CleanShot%202024-04-15%20at%2021.34.57.png)
 
+## Task 5 - Call your OCI Resource Manager automation with REST 
+
+All the resources in **OCI** have a **REST API** or an **OCI CLI** command to call services as is executed in your **OCI** console.
+If you don't know about **OCI REST API**, you can see here: [OCI REST API](https://docs.oracle.com/en-us/iaas/Content/API/Concepts/usingapi.htm). You can view this list os **OCI CLI** commands here: [OCI CLI](https://docs.oracle.com/en-us/iaas/tools/oci-cli/3.39.0/oci_cli_docs/)
+
+Now we can choose to execute the **OCI Resource Manager** stack with a **REST** ou an **OCI CLI** command.
+
+You can create a **Job** with this material: [Create a Job](https://docs.oracle.com/en-us/iaas/api/#/en/resourcemanager/20180917/Job/CreateJob)
+
+![img_20.png](img_20.png)
+
+You will need to create the signature for your **REST** requests. Please, see this material to authenticate and consume the **APIs**
+
+[Oracle Cloud Infrastructure (OCI) REST call walkthrough with curl](https://www.ateam-oracle.com/post/oracle-cloud-infrastructure-oci-rest-call-walkthrough-with-curl)
+
 ## Acknowledgments
 
 - Author: Cristiano Hoshikawa (Oracle LAD A-Team Solution Engineer)
@@ -212,3 +245,7 @@ Click again on **apply** button in your **stack** detail page and you can see yo
 - [Using OCI Vault Secrets for Terraform resources](https://blogs.oracle.com/developers/post/using-oci-vault-secrets-for-terraform-resources)
 - [Securing Resource Manager](https://docs.oracle.com/en-us/iaas/Content/Security/Reference/resourcemanager_security.htm)
 - [Overview of IAM](https://docs.oracle.com/en-us/iaas/Content/Identity/getstarted/identity-domains.htm#identity_documentation)
+- [Create a Job](https://docs.oracle.com/en-us/iaas/api/#/en/resourcemanager/20180917/Job/CreateJob)
+- [OCI REST API](https://docs.oracle.com/en-us/iaas/Content/API/Concepts/usingapi.htm)
+- [OCI CLI](https://docs.oracle.com/en-us/iaas/tools/oci-cli/3.39.0/oci_cli_docs/)
+- [Oracle Cloud Infrastructure (OCI) REST call walkthrough with curl](https://www.ateam-oracle.com/post/oracle-cloud-infrastructure-oci-rest-call-walkthrough-with-curl)
