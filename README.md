@@ -105,13 +105,31 @@ You can now edit the code. The default code generates a random string for the pa
 
 You need to add a new data named **oci_secrets_secretbundle** and assign it to the attributes:
 
-- admin_password
-- 
+- **admin_password** at autonomous_data_warehouse and autonomous_database positions
+- **password** at autonomous_database_wallet position
 
-**Figure 3 - main.tf** file
+**Figure 3 - main.tf / autonomous_data_warehouse positon**
 ![CleanShot 2024-04-15 at 08.28.07.png](CleanShot%202024-04-15%20at%2008.28.07.png)
+
+**Figure 4 - main.tf / autonomous_database position**  
+![img_4.png](img_4.png)
+
+**Figure 5 - main.tf / autonomous_database_wallet position**
+![img_5.png](img_5.png)
+
 ![CleanShot 2024-04-15 at 08.30.15 substituir.png](CleanShot%202024-04-15%20at%2008.30.15%20substituir.png)
+
+Include this code into **variables.tf** file and replace the **OCID** for your secret generated previously
+
+
+      variable "secret_ocid" {
+        default = "ocid1.vaultsecret.oc1.iad.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+
+**Figure 6 - variables.tf** file
 ![CleanShot 2024-04-15 at 08.30.52.png](CleanShot%202024-04-15%20at%2008.30.52.png)
+
+
 ![CleanShot 2024-04-15 at 20.02.33.png](CleanShot%202024-04-15%20at%2020.02.33.png)
 ![CleanShot 2024-04-15 at 20.12.37.png](CleanShot%202024-04-15%20at%2020.12.37.png)
 ![CleanShot 2024-04-15 at 20.12.55.png](CleanShot%202024-04-15%20at%2020.12.55.png)
