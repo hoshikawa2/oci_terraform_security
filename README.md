@@ -180,6 +180,8 @@ Include this code into **variables.tf** file and replace the **OCID** for your s
 **Figure 6 - variables.tf** file
 ![CleanShot 2024-04-15 at 08.30.52.png](images/CleanShot%202024-04-15%20at%2008.30.52.png)
 
+>**Note:** Save your files now. Move the mouse cursor over your Stack (on the right side of the editor, in "Autonomous Transaction Processing...." title), click the right button and save your project. If you get out without saving, the execution assumes you will use the random string in the original code script.
+
 ## Task 4 - Test permissions
 
 You can test the **Policies** and see how you have control of **OCI Resource Manager**, **OCI Vault / Secret** and **Autonomous** instances in a specific **compartment**.
