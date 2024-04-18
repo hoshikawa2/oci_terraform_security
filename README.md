@@ -90,7 +90,7 @@ Click in **Create Policy** button
 
 And include the policies:
 
-![CleanShot 2024-04-15 at 21.26.11.png](images/CleanShot%202024-04-15%20at%2021.26.11.png)
+![cloud_shell.png](images/cloud_shell.png)
 
     This policy gives the permission to group TestGroup created previously to manage a Stack and jobs in Resource Manager
     - Allow group 'Default'/'TestGroup' to manage orm-stacks in compartment integration
@@ -106,6 +106,8 @@ And include the policies:
     This policy gives the right to save the Terraform scripts on a specific compartment
     - Allow group 'Default'/'TestGroup' to manage all-resources in compartment kubernetes
 
+    This policy allows the users of TestGroup to edit code in **OCI Code Editor**
+    - Allow group 'Default'/'TestGroup' to use cloud-shell in tenancy
 
 ## Task 3 - Create a Stack from a Template
 
@@ -163,6 +165,12 @@ You need to add a new data named **oci_secrets_secretbundle** and assign it to t
 
 **Figure 3 - main.tf / autonomous_data_warehouse positon**
 ![CleanShot 2024-04-15 at 08.28.07.png](images/CleanShot%202024-04-15%20at%2008.28.07.png)
+
+    data "oci_secrets_secretbundle" "bundle" {
+        secret_id = var.secret_ocid
+    }
+
+    admin_password = base64decode(data.oci_secrets_secretbundle.bundle.secret_bundle_content.0.content)
 
 **Figure 4 - main.tf / autonomous_database position**  
 ![img_4.png](images/img_4.png)
