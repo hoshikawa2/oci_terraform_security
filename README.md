@@ -240,13 +240,33 @@ If you don't know about **OCI REST API**, you can see here: [OCI REST API](https
 
 Now we can choose to execute the **OCI Resource Manager** stack with a **REST** ou an **OCI CLI** command.
 
-You can create a **Job** with this material: [Create a Job](https://docs.oracle.com/en-us/iaas/api/#/en/resourcemanager/20180917/Job/CreateJob)
+You can create a **Job** with this material: [Create a Job](https://docs.oracle.com/en-us/iaas/api/#/en/resourcemanager/20180917/Job/CreateJob) or you can use this sample code [curl-oci.zip](./files/curl-oci.zip) with **curl-oci.sh** prepared with **OCI** parameters.
 
 ![img_20.png](images/img_20.png)
 
-You will need to create the signature for your **REST** requests. Please, see this material to authenticate and consume the **APIs**
-
+You will need to create the signature for your **REST** requests.
 [Oracle Cloud Infrastructure (OCI) REST call walkthrough with curl](https://www.ateam-oracle.com/post/oracle-cloud-infrastructure-oci-rest-call-walkthrough-with-curl)
+
+
+First, create a file named **STACK-RUN.sh**. This will be your REST request using a **curl-oci.sh** (this tool will prepare your authorization string with your **OCI** information).
+
+![img_1.png](images/rest_api_2.png)
+
+The next step is create a file named **request.json** with your **stack ID** and **compartment ID** reference. 
+
+![img.png](images/rest_api_1.png)
+
+Open the **curl-oci.sh** file and change these parameters. These parameters are the same of your **OCI CLI** installation.
+
+![img_2.png](images/rest_api_3.png)
+
+And now you can execute the script
+
+![img_3.png](images/rest_api_4.png)
+
+You can see the success results
+
+![img_4.png](images/rest_api_5.png)
 
 ## Acknowledgments
 
@@ -261,3 +281,4 @@ You will need to create the signature for your **REST** requests. Please, see th
 - [OCI REST API](https://docs.oracle.com/en-us/iaas/Content/API/Concepts/usingapi.htm)
 - [OCI CLI](https://docs.oracle.com/en-us/iaas/tools/oci-cli/3.39.0/oci_cli_docs/)
 - [Oracle Cloud Infrastructure (OCI) REST call walkthrough with curl](https://www.ateam-oracle.com/post/oracle-cloud-infrastructure-oci-rest-call-walkthrough-with-curl)
+- [Managing Autonomous Data Warehouse Using oci-curl](https://blogs.oracle.com/datawarehousing/post/managing-autonomous-data-warehouse-using-oci-curl)

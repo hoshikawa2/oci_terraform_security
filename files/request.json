@@ -1,0 +1,11 @@
+{
+  "stackId": "ocid1.ormstack.oc1.iad.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+  "compartmentId": "ocid1.compartment.oc1..xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+  "operation": "APPLY",
+  "applyJobPlanResolution": {
+    "isAutoApproved": true
+  }
+} 
+
+
+
